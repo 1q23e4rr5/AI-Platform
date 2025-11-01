@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>شهید عباس پورطاهریان | یادبودی ماندگار</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* متغیرهای رنگ */
+        :root {
+            --primary: #8B4513;
+            --primary-light: #a86e3d;
+            --secondary: #2F4F4F;
+            --light: #f8f9fa;
+            --light-beige: #f5f1e8;
+            --dark: #333;
+            --gray: #6c757d;
+            --white: #fff;
+        }
+        
+        /* استایل‌های پایه */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        /* انیمیشن‌ها */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes slideUp {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.03); }
+            100% { transform: scale(1); }
+        }
+        
+        /* صفحه ورود */
+        .login-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(47, 79, 79, 0.85), rgba(139, 69, 19, 0.85)), url('https://source.unsplash.com/random/1600x900/?memorial') no-repeat center center/cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            animation: fadeIn 1s ease;
+        }
+        
+        .login-box {
+            background-color: var(--white);
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            width: 90%;
+            max-width: 400px;
+            text-align: center;
+            animation: slideUp 0.8s ease;
+        }
+        
+        .login-box h2 {
+            color: var(--primary);
+            margin-bottom: 30px;
+            font-size: 1.8rem;
+            position: relative;
+            padding-bottom: 15px;
+        }
+        
+        .login-box h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 50%;
+            transform: translateX(50%);
+            width: 80px;
+            height: 3px;
+            background-color: var(--secondary);
+        }
+        
+        .login-form .form-group {
+            margin-bottom: 20px;
+            text-align: right;
+        }
+        
+        .login-form label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--dark);
+            font-weight: 500;
+        }
+        
+        .login-form input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+        
+        .login-form input:focus {
+            border-color: var(--primary);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(139, 69, 19, 0.1);
+        }
+        
+        .login-btn {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 6px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            width: 100%;
+        }
+        
+        .login-btn:hover {
+            background-color: var(--primary-light);
+            transform: translateY(-2px);
+        }
+        
+        .error-message {
+            color: #d9534f;
+            margin-top: 15px;
+            display: none;
+        }
+        
+        /* راهنمای سایت */
+        .guide-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.85);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 999;
+        }
+        
+        .guide-box {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 600px;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+        
+        .guide-box h2 {
+            color: var(--primary);
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .guide-box p {
+            margin-bottom: 15px;
+            line-height: 1.7;
+        }
+        
+        .close-guide {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            display: block;
+            margin: 20px auto 0;
+        }
+        
+        /* هدر */
+        header {
+            background: linear-gradient(rgba(47, 79, 79, 0.8), rgba(139, 69, 19, 0.8)), url('https://source.unsplash.com/random/1600x900/?memorial,iran') no-repeat center center/cover;
+            color: white;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+        }
+        
+        .header-content {
+            max-width: 800px;
+            animation: slideUp 1s ease;
+        }
+        
+        .header-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+        }
+        
+        .header-content p {
+            font-size: 1.5rem;
+            margin-bottom: 2.5rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--primary);
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 6px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+        
+        .btn:hover {
+            background-color: var(--primary-light);
+            transform: translateY(-3px);
+        }
+        
+        /* نوار ناوبری */
+        nav {
+            background-color: var(--secondary);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: white;
+        }
+        
+        .logo span {
+            color: #d4af37;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 30px;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.1rem;
+            transition: color 0.3s;
+            padding: 5px 0;
+            position: relative;
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 0;
+            height: 2px;
+            background-color: #d4af37;
+            transition: width 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: #d4af37;
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        /* بخش‌های اصلی */
+        section {
+            padding: 80px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            position: relative;
+            display: inline-block;
+            padding-bottom: 15px;
+        }
+        
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 50%;
+            transform: translateX(50%);
+            width: 100px;
+            height: 3px;
+            background-color: var(--secondary);
+        }
+        
+        /* بخش زندگی‌نامه */
+        .biography {
+            background-color: var(--white);
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            padding: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .biography-content {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: flex-start;
+            gap: 40px;
+        }
+        
+        .biography-img {
+            flex: 1;
+            min-width: 300px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .biography-img img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+        
+        .biography-img:hover img {
+            transform: scale(1.03);
+        }
+        
+        .biography-text {
+            flex: 2;
+            min-width: 300px;
+        }
+        
+        .biography-text h3 {
+            font-size: 1.8rem;
+            margin-bottom: 25px;
+            color: var(--primary);
+        }
+        
+        .biography-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .detail-item {
+            background-color: var(--light-beige);
+            padding: 15px;
+            border-radius: 8px;
+            border-right: 3px solid var(--primary);
+        }
+        
+        .detail-item strong {
+            color: var(--primary);
+        }
+        
+        /* بخش وصیت‌نامه */
+        .testament {
+            background: linear-gradient(rgba(47, 79, 79, 0.9), rgba(139, 69, 19, 0.9)), url('https://source.unsplash.com/random/1600x900/?quran,book') no-repeat center center/cover;
+            color: white;
+            text-align: center;
+            padding: 100px 0;
+            border-radius: 10px;
+            margin: 40px 0;
+        }
+        
+        .testament-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .testament-content h2 {
+            font-size: 2.2rem;
+            margin-bottom: 40px;
+        }
+        
+        .testament-content blockquote {
+            font-size: 1.5rem;
+            font-style: italic;
+            line-height: 1.8;
+            margin-bottom: 30px;
+        }
+        
+        /* بخش خاطرات */
+        .memories {
+            background-color: var(--white);
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            padding: 40px;
+            margin: 40px 0;
+        }
+        
+        .memory-content {
+            line-height: 1.8;
+        }
+        
+        .memory-content p {
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+        
+        .memory-quote {
+            background-color: var(--light-beige);
+            padding: 20px;
+            border-radius: 8px;
+            margin: 25px 0;
+            border-right: 4px solid var(--primary);
+            font-style: italic;
+        }
+        
+        /* لینک‌های مفید */
+        .useful-links {
+            background-color: var(--light-beige);
+            padding: 40px;
+            border-radius: 10px;
+            margin-top: 40px;
+        }
+        
+        .useful-links h3 {
+            color: var(--primary);
+            margin-bottom: 25px;
+            text-align: center;
+            font-size: 1.8rem;
+        }
+        
+        .links-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+        
+        .link-item {
+            background-color: var(--white);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+            flex: 1;
+            min-width: 250px;
+            max-width: 350px;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+        
+        .link-item:hover {
+            transform: translateY(-5px);
+        }
+        
+        .link-item a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.1rem;
+            display: block;
+            margin-bottom: 10px;
+        }
+        
+        .link-item p {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+        
+        /* سازنده سایت */
+        .creator {
+            text-align: center;
+            margin-top: 50px;
+            padding: 20px;
+            background-color: var(--light-beige);
+            border-radius: 8px;
+        }
+        
+        .creator p {
+            font-size: 1.1rem;
+            color: var(--dark);
+        }
+        
+        .creator strong {
+            color: var(--primary);
+        }
+        
+        /* رسپانسیو */
+        @media (max-width: 768px) {
+            .header-content h1 {
+                font-size: 2.5rem;
+            }
+            
+            .header-content p {
+                font-size: 1.2rem;
+            }
+            
+            .nav-container {
+                flex-direction: column;
+            }
+            
+            .nav-links {
+                margin-top: 20px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .nav-links li {
+                margin: 0 10px 10px;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+            
+            .biography-content {
+                flex-direction: column;
+            }
+            
+            .biography-img {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- صفحه ورود -->
+    <div class="login-container" id="loginContainer">
+        <div class="login-box">
+            <h2>ورود به سایت یادبود شهید</h2>
+            <form class="login-form" id="loginForm">
+                <div class="form-group">
+                    <label for="username">نام کاربری (اختیاری)</label>
+                    <input type="text" id="username" placeholder="نام کاربری را وارد کنید">
+                </div>
+                <div class="form-group">
+                    <label for="password">رمز عبور <span style="color: #d9534f">*</span></label>
+                    <input type="password" id="password" placeholder="رمز عبور را وارد کنید" required>
+                </div>
+                <button type="submit" class="login-btn">ورود به سایت</button>
+                <div class="error-message" id="errorMessage">لطفاً رمز عبور را وارد کنید!</div>
+            </form>
+        </div>
+    </div>
+
+    <!-- راهنمای سایت -->
+    <div class="guide-container" id="guideContainer">
+        <div class="guide-box">
+            <h2>راهنمای سایت یادبود شهید عباس پورطاهریان</h2>
+            <p>این سایت به منظور بزرگداشت و زنده نگه داشتن یاد و خاطره شهید والامقام، عباس پورطاهریان طراحی شده است.</p>
+            <p><strong>بخش‌های مختلف سایت:</strong></p>
+            <p>• <strong>زندگی‌نامه:</strong> اطلاعات کامل درباره زندگی و فعالیت‌های شهید</p>
+            <p>• <strong>وصیت‌نامه:</strong> بخش‌هایی از وصیت‌نامه شهید</p>
+            <p>• <strong>خاطرات:</strong> خاطرات همرزمان و نزدیکان از شهید</p>
+            <p>• <strong>لینک‌های مفید:</strong> دسترسی به منابع مرتبط با شهدا و دفاع مقدس</p>
+            <p>امیدواریم با مطالعه این مطالب، بیشتر با شخصیت و ایثارگری این شهید بزرگوار آشنا شوید.</p>
+            <button class="close-guide" id="closeGuide">بستن راهنما</button>
+        </div>
+    </div>
+
+    <!-- محتوای اصلی سایت -->
+    <div id="mainContent" style="display: none;">
+        <!-- هدر -->
+        <header>
+            <div class="header-content">
+                <h1>شهید عباس پورطاهریان</h1>
+                <p>یادبودی ماندگار از شهید والامقام دفاع مقدس</p>
+                <a href="#biography" class="btn">مطالعه زندگی‌نامه</a>
+            </div>
+        </header>
+
+        <!-- نوار ناوبری -->
+        <nav>
+            <div class="container nav-container">
+                <div class="logo">شهید<span>عباس</span></div>
+                <ul class="nav-links">
+                    <li><a href="#biography">زندگی‌نامه</a></li>
+                    <li><a href="#testament">وصیت‌نامه</a></li>
+                    <li><a href="#memories">خاطرات</a></li>
+                    <li><a href="#links">لینک‌های مفید</a></li>
+                    <li><a href="#" id="showGuide">راهنما</a></li>
+                </ul>
+            </div>
+        </nav>
+
+        <!-- بخش اصلی -->
+        <main class="container">
+            <!-- زندگی‌نامه -->
+            <section id="biography">
+                <div class="section-title">
+                    <h2>زندگی‌نامه</h2>
+                </div>
+                <div class="biography">
+                    <div class="biography-content">
+                        <div class="biography-img">
+                            <img src="https://shohada.org/assets/styles/medium/public/media-images/1813190002.jpg?itok=_cpr8qTZ" alt="شهید عباس پورطاهریان">
+                        </div>
+                        <div class="biography-text">
+                            <h3>زندگی پربرکت شهید</h3>
+                            <p>شهید عباس پورطاهریان در تاریخ یکم شهریور ۱۳۴۲ در شهرستان مهدیشهر دیده به جهان گشود. وی از نوجوانی با ایمان و اعتقاد راسخ به اسلام و آرمان‌های انقلاب اسلامی، در مسیر خدمت به مردم و دفاع از میهن گام نهاد. با شروع جنگ تحمیلی، این شهید بزرگوار به ندای «هل من ناصر ینصرنی» امام خمینی (ره) لبیک گفت و به جبهه‌های نبرد حق علیه باطل شتافت.</p>
+                            <div class="biography-details">
+                                <div class="detail-item">
+                                    <strong>نام:</strong> عباس
+                                </div>
+                                <div class="detail-item">
+                                    <strong>نام خانوادگی:</strong> پورطاهریان
+                                </div>
+                                <div class="detail-item">
+                                    <strong>نام پدر:</strong> علی اکبر
+                                </div>
+                                <div class="detail-item">
+                                    <strong>تاریخ تولد:</strong> یکم شهریور ۱۳۴۲
+                                </div>
+                                <div class="detail-item">
+                                    <strong>محل تولد:</strong> شهرستان مهدیشهر
+                                </div>
+                                <div class="detail-item">
+                                    <strong>تحصیلات:</strong> چهارم متوسطه (دیپلم)
+                                </div>
+                                <div class="detail-item">
+                                    <strong>ارگان اعزام کننده:</strong> بسیج
+                                </div>
+                                <div class="detail-item">
+                                    <strong>تاریخ شهادت:</strong> شانزدهم مرداد ۱۳۶۲
+                                </div>
+                                <div class="detail-item">
+                                    <strong>محل شهادت:</strong> مهران
+                                </div>
+                                <div class="detail-item">
+                                    <strong>نحوه شهادت:</strong> اصابت ترکش
+                                </div>
+                                <div class="detail-item">
+                                    <strong>مزار:</strong> گلزار شهدای زادگاهش
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- وصیت‌نامه -->
+            <section id="testament">
+                <div class="testament">
+                    <div class="testament-content">
+                        <h2>وصیت‌نامه شهید</h2>
+                        <blockquote>
+                            "من براساس رسالت و مسئولیتی که حس نموده در راه خدا و برای پاسداری و حراست از انقلاب اسلامی ایران، که این انقلاب به وسيلة بهترین خون ها آبیاری شده و بعد از این نیز احتیاج به خون دارد، به جبهه می روم تا شاید سعادتی خداوند نصیبمان گرداند. همیشه حزب شیطان در مقابل حزب الله موانع ایجاد می کند که باید با مقاومت و استواری کامل چون کوه و با ایمانی کامل و اعتقاد به خدای تبارک و تعالی در مقابل این موانع ایستادگی کرد."
+                        </blockquote>
+                        <p>بخشی از وصیت‌نامه شهید عباس پورطاهریان</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- خاطرات -->
+            <section id="memories">
+                <div class="section-title">
+                    <h2>خاطرات همرزمان</h2>
+                </div>
+                <div class="memories">
+                    <div class="memory-content">
+                        <p>مرداد ماه سال 1362 بود؛ ساعت نیمه‌های شب را نشان می‌داد و در اتاق ما و اتاق دیگر رزمندگان، دعای توسل برقرار بود. انگار بعضی‌ها می‌دانستند که این آخرین مناجات‌شان با خدا خواهد بود و های‌های گریه می‌کردند و با خدای‌شان راز و نیاز داشتند.</p>
+                        <p>بعد از دعا، مراسم وداع برقرار شد؛ بچه‌های رزمنده یکدیگر را در آغوش می‌گرفتند و گریه می‌کردند. با خود گفتم: این گریه‌ها برای چیست؟ از کجا معلوم ما را در عملیات شرکت دهند؟ هنوز که چیزی واقع نشده است؟ و ... اما آنها که جای دیگری را می‌دیدند، از یکدیگر حلالیت می‌طلبیدند و قول شفاعت از هم می‌گرفتند.</p>
+                        <div class="memory-quote">
+                            یادم نمی‌رود صحنه‌ای که عباس پورطاهریان به طرف من آمد و گفت: امشب می‌خواهم از حسن یک قول بگیرم. گفتم: چه قولی؟ گفت: اگر شهید شدی، مرا هم شفاعت کن. من که لیاقت چنین فوز بزرگی را در خود نمی‌دیدم، از فرصت استفاده کردم و گفتم: به شرطی که تو هم قول دهی.
+                        </div>
+                        <p>چند ساعت بعد شهید عباس پورطاهریان به همراه شهیدان فیروز تبیانیان، مهدی احمدیان، حسین طاهرکرد، الیاس دامغانی، علی اکبر تورانیان و مهدی معصومیان به آرزوی دیرینه خود رسیدند و مهمان ابا عبدالله الحسین علیه السلام شدند.</p>
+                        <p style="text-align: left; font-style: italic; margin-top: 20px;">(به نقل از برادر رزمنده حسن یوسفیان)</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- لینک‌های مفید -->
+            <section id="links">
+                <div class="useful-links">
+                    <h3>لینک‌های مفید</h3>
+                    <div class="links-container">
+                        <div class="link-item">
+                            <a href="https://shohada.ir" target="_blank">سامانه جامع اطلاعات شهدا</a>
+                            <p>دسترسی به اطلاعات کامل شهدای دفاع مقدس</p>
+                        </div>
+                        <div class="link-item">
+                            <a href="https://isaar.ir" target="_blank">بنیاد شهید و امور ایثارگران</a>
+                            <p>مرجع رسمی اطلاعات و خدمات مرتبط با شهدا</p>
+                        </div>
+                        <div class="link-item">
+                            <a href="https://defamuseum.ir" target="_blank">موزه دفاع مقدس</a>
+                            <p>آشنایی با تاریخ و آثار دفاع مقدس</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- سازنده سایت -->
+            <div class="creator">
+                <p>سازنده سایت: <strong>امیر محمد ملک احمدی</strong></p>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // سیستم ورود
+        const loginContainer = document.getElementById('loginContainer');
+        const loginForm = document.getElementById('loginForm');
+        const errorMessage = document.getElementById('errorMessage');
+        const mainContent = document.getElementById('mainContent');
+        
+        loginForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const password = document.getElementById('password').value;
+            
+            if (!password) {
+                // نمایش خطا اگر رمز عبور خالی باشد
+                errorMessage.style.display = 'block';
+                return;
+            }
+            
+            // ورود موفق
+            errorMessage.style.display = 'none';
+            loginContainer.style.opacity = '0';
+            setTimeout(() => {
+                loginContainer.style.display = 'none';
+                mainContent.style.display = 'block';
+                // نمایش راهنما پس از ورود
+                document.getElementById('guideContainer').style.display = 'flex';
+            }, 500);
+        });
+        
+        // سیستم راهنما
+        const guideContainer = document.getElementById('guideContainer');
+        const showGuide = document.getElementById('showGuide');
+        const closeGuide = document.getElementById('closeGuide');
+        
+        showGuide.addEventListener('click', function(e) {
+            e.preventDefault();
+            guideContainer.style.display = 'flex';
+        });
+        
+        closeGuide.addEventListener('click', function() {
+            guideContainer.style.display = 'none';
+        });
+        
+        // اسکرول نرم برای لینک‌های داخلی
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if(targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if(targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // تغییر استایل نوار ناوبری هنگام اسکرول
+        window.addEventListener('scroll', function() {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 100) {
+                nav.style.padding = '10px 0';
+                nav.style.boxShadow = '0 5px 15px rgba(0, 0, 0, 0.2)';
+            } else {
+                nav.style.padding = '15px 0';
+                nav.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.1)';
+            }
+        });
+    </script>
+</body>
+</html>
